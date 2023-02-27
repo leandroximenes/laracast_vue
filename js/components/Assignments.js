@@ -5,7 +5,14 @@ export default {
   template:
     /*html*/
     `<AssignmentList :assignments="inProgress" title="In Progress"></AssignmentList>
-    <AssignmentList :assignments="done" title="Done"></AssignmentList>`,
+    <AssignmentList :assignments="done" title="Done"></AssignmentList>
+    
+    <form @submit.prevent="addAssignment" class="text-black">
+      <input type="text" v-model="newAssignment" class="p-2" />
+      <button type="submit" class="bg-white p-2 border-l border-gray-600 hover:bg-gray-300">Add</button>
+    </form>
+    
+    `,
   data() {
     return {
       assignments: [
@@ -25,6 +32,7 @@ export default {
           complete: false,
         },
       ],
+      newAssignment: "",
     };
   },
   computed: {
@@ -33,6 +41,16 @@ export default {
     },
     done() {
       return this.assignments.filter((item) => item.complete);
+    },
+  },
+  methods: {
+    addAssignment() {
+      this.assignments.push({
+        id: this.assignments.length + 1,
+        name: this.newAssignment,
+        complete: false,
+      });
+      this.newAssignment = "";
     },
   },
 };

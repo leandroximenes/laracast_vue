@@ -5,7 +5,7 @@ export default {
   template:
     /*html*/
     `<section v-show="assignments.length">
-        <h2 class="font-bold mb-2">{{ this.title }}</h2>
+        <h2 class="font-bold mb-2 text-lg">{{ this.title }}</h2>
           <ul class="border border-gray-200 divide-y divide-y-gray-600">
             <Assignment v-for="item in assignments" :key="item.id" :assignment="item"></Assignment>
           </ul>
