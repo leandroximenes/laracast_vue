@@ -1,7 +1,8 @@
 import Assignment from "./Assignment.js";
+import AssignmentCategories from "./AssignmentCategories.js";
 
 export default {
-  components: { Assignment },
+  components: { Assignment, AssignmentCategories },
   template:
     /*html*/
     `<section v-show="assignments.length">
@@ -9,16 +10,12 @@ export default {
           {{ this.title }}
           ({{ filtedAssignments.length }})
         </h2>
-        <div class="space-x-1 my-2">
-          <button 
-            class="px-2 border rounded" 
-            :class="{'border-blue-400 text-blue-400' : category === this.currentCategory}"
-            v-for="category in categories" 
-            @click="ChangeCategory(category)"
-          >
-            {{ category }}
-          </button>
-        </div>
+        <assignment-categories 
+          :initialCategories="this.assignments.map((a) => a.category)"
+          :currentCategory="currentCategory"
+          @change="ChangeCategory"
+        >
+        </assignment-categories>
         <ul class="border border-gray-200 divide-y divide-y-gray-600">
           <Assignment v-for="item in filtedAssignments" :key="item.id" :assignment="item"></Assignment>
         </ul>
@@ -33,9 +30,6 @@ export default {
     };
   },
   computed: {
-    categories() {
-      return ["All", ...new Set(this.assignments.map((a) => a.category))];
-    },
     filtedAssignments() {
       if (this.currentCategory === "All") {
         return this.assignments;
