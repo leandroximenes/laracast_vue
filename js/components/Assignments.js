@@ -15,16 +15,19 @@ export default {
           id: 1,
           name: "Go shopping",
           complete: false,
+          category: "math",
         },
         {
           id: 2,
           name: "Study Laravel",
           complete: false,
+          category: "math",
         },
         {
           id: 3,
           name: "Play with Sara",
           complete: false,
+          category: "science",
         },
       ],
     };
